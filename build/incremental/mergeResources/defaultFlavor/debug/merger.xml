@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res" >
+            <file
+                name="ic_launcher"
+                path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res/drawable-hdpi/ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res/drawable-mdpi/ic_launcher.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res/drawable-xhdpi/ic_launcher.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res/drawable-xxhdpi/ic_launcher.png"
+                qualifiers="xxhdpi"
+                type="drawable" />
+            <file
+                name="activity_main"
+                path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res/layout/activity_main.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="fragment_main"
+                path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res/layout/fragment_main.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="main"
+                path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res/menu/main.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res/values/dimens.xml"
+                qualifiers="" >
+                <dimen name="activity_horizontal_margin" >16dp
+                </dimen>
+                <dimen name="activity_vertical_margin" >16dp
+                </dimen>
+            </file>
+            <file
+                path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res/values/strings.xml"
+                qualifiers="" >
+                <string name="power_on" >Kaffetrakteren er på.
+                </string>
+                <string name="action_settings" >Innstillinger
+                </string>
+                <string name="power_off" >Kaffetrakteren er av.
+                </string>
+                <string name="app_name" >Abakaffe
+                </string>
+                <string name="power_placeholder" ></string>
+                <string name="update_button" >Oppdater
+                </string>
+                <string name="status_placeholder" >Ikke oppdatert
+                </string>
+            </file>
+            <file
+                path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res/values/styles.xml"
+                qualifiers="" >
+
+                <style
+                    name="AppTheme"
+                    parent="android:Theme.Holo.Light.DarkActionBar" >
+
+                    <!-- Customize your theme here. -->
+                </style>
+            </file>
+            <file
+                path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res/values-w820dp/dimens.xml"
+                qualifiers="w820dp" >
+                <dimen name="activity_horizontal_margin" >64dp
+                </dimen>
+            </file>
+            <file
+                path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/main/res/values/analytics.xml"
+                qualifiers="" >
+                <bool name="ga_autoActivityTracking" >
+true
+                </bool>
+
+                <string name="ga_trackingId" >UA-46101020-1
+                </string>
+
+                <bool name="ga_reportUncaughtExceptions" >
+true
+                </bool>
+                <bool name="ga_anonymizeIp" >
+true
+                </bool>
+            </file>
+        </source>
+        <source path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/build/res/rs/defaultFlavor/debug" />
+    </dataSet>
+    <dataSet config="defaultFlavor" >
+        <source path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/defaultFlavor/res" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/Users/fredrik/Dropbox/Programmering/Android/Abakaffe/App/src/debug/res" />
+    </dataSet>
+
+</merger>

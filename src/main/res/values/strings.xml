@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Abakaffe</string>
+    <string name="action_settings">Innstillinger</string>
+    <string name="status_placeholder">Ikke oppdatert</string>
+    <string name="power_placeholder"></string>
+
+    <string name="power_on">Kaffetrakteren er på.</string>
+    <string name="power_off">Kaffetrakteren er av.</string>
+    <string name="update_button">Oppdater</string>
+</resources>
