@@ -5,15 +5,13 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.util.Log;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,7 +29,7 @@ public class AbakaffeFragment extends Fragment {
 
     protected Context context;
     private Button updateButton;
-    private TextView statusTextView, powerTextView;
+    private TextView statusTextView, powerTextView, hoursTextView, minutesTextView, secondsTextView;
 
 
     public AbakaffeFragment(Context context) {
@@ -52,6 +50,10 @@ public class AbakaffeFragment extends Fragment {
         statusTextView = (TextView) view.findViewById(R.id.status_textview);
         powerTextView = (TextView) view.findViewById(R.id.power_textview);
 
+        hoursTextView = (TextView) view.findViewById(R.id.hours);
+        minutesTextView = (TextView) view.findViewById(R.id.minutes);
+        secondsTextView = (TextView) view.findViewById(R.id.seconds);
+
         updateButton = (Button) view.findViewById(R.id.update_button);
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +62,11 @@ public class AbakaffeFragment extends Fragment {
             }
         });
 
-        powerTextView.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto-li.ttf"));
+        Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto-li.ttf");
+        powerTextView.setTypeface(roboto);
+        hoursTextView.setTypeface(roboto);
+        minutesTextView.setTypeface(roboto);
+        secondsTextView.setTypeface(roboto);
 
         return view;
     }
@@ -76,21 +82,34 @@ public class AbakaffeFragment extends Fragment {
             if (result != null) {
                 try {
                     boolean status = result.getBoolean("status");
+
+                    SpannableStringBuilder stringBuilder = new SpannableStringBuilder(getText(R.string.power));
                     if (status) {
-                        powerTextView.setText(getText(R.string.power_on));
+                        stringBuilder.append(" på");
+                        stringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.green)), stringBuilder.length() - 2, stringBuilder.length(), 0);
                     } else {
-                        powerTextView.setText(getText(R.string.power_off));
+                        stringBuilder.append(" av");
+                        stringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.red)), stringBuilder.length() - 2, stringBuilder.length(), 0);
                     }
+
+                    powerTextView.setText(stringBuilder, TextView.BufferType.SPANNABLE);
+
                     String last_start = result.getString("last_start");
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
                     Date now = new Date();
                     Date last = df.parse(last_start);
-                    long seconds = (now.getTime() - last.getTime()) / 1000;
-                    long mins = seconds / 60;
-                    long hours = seconds / 3600;
-                    statusTextView.setText(Utilities.formatStatus(last_start));
+                    long diff = (now.getTime() - last.getTime()) / 1000;
+                    long hours = diff / 3600;
+                    diff -= hours * 3600;
+                    long mins = diff / 60;
+                    diff -= mins * 60;
+                    long seconds = diff;
+                    hoursTextView.setText(hours + "");
+                    minutesTextView.setText(mins + "");
+                    secondsTextView.setText(seconds + "");
+                    statusTextView.setVisibility(View.GONE);
                 } catch (JSONException e) {
-                } catch (ParseException e){
+                } catch (ParseException e) {
                 }
             }
         }
