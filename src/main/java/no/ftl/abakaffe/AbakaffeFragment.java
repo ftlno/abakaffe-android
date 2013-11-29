@@ -21,7 +21,7 @@ public class AbakaffeFragment extends Fragment {
 
     protected Context context;
     private Button updateButton;
-    private TextView statusTextView,powerTextView;
+    private TextView statusTextView, powerTextView;
 
 
     public AbakaffeFragment(Context context) {
@@ -39,8 +39,8 @@ public class AbakaffeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        statusTextView = (TextView)view.findViewById(R.id.status_textview);
-        powerTextView = (TextView)view.findViewById(R.id.power_textview);
+        statusTextView = (TextView) view.findViewById(R.id.status_textview);
+        powerTextView = (TextView) view.findViewById(R.id.power_textview);
 
         updateButton = (Button) view.findViewById(R.id.update_button);
         updateButton.setOnClickListener(new View.OnClickListener() {
@@ -64,24 +64,24 @@ public class AbakaffeFragment extends Fragment {
 
             String toastText = "";
 
-            if(result != null){
+            if (result != null) {
 
-                try{
-                boolean status = result.getBoolean("status");
-                if(status){
-                    powerTextView.setText(getText(R.string.power_on));
-                }else{
-                    powerTextView.setText(getText(R.string.power_off));
-                }
+                try {
+                    boolean status = result.getBoolean("status");
+                    if (status) {
+                        powerTextView.setText(getText(R.string.power_on));
+                    } else {
+                        powerTextView.setText(getText(R.string.power_off));
+                    }
 
-                String last_start = result.getString("last_start");
-                statusTextView.setText(Utilities.formatStatus(last_start));
-                    toastText="Oppdatert";
-                }catch(Exception e){
-                    toastText="Oppdatering feilet";
+                    String last_start = result.getString("last_start");
+                    statusTextView.setText(Utilities.formatStatus(last_start));
+                    toastText = "Oppdatert";
+                } catch (Exception e) {
+                    toastText = "Oppdatering feilet";
                 }
-            }else{
-                toastText="Oppdatering feilet";
+            } else {
+                toastText = "Oppdatering feilet";
             }
             Toast.makeText(context, toastText,
                     Toast.LENGTH_LONG).show();

@@ -16,11 +16,11 @@ public class NetworkOperations {
 
     public static String STATUS_URL = "http://kaffe.abakus.no/api/status";
 
-    public static JSONObject updateStatus(){
+    public static JSONObject updateStatus() {
         return Utilities.getJsonFromInputStream(getRequest(STATUS_URL), "coffee");
     }
 
-    private static InputStream getRequest(String url){
+    private static InputStream getRequest(String url) {
 
         InputStream content = null;
         try {

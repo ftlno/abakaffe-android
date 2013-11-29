@@ -14,7 +14,7 @@ import java.io.Writer;
  */
 
 public class Utilities {
-    public static JSONObject getJsonFromInputStream(final InputStream inputStream,String type) {
+    public static JSONObject getJsonFromInputStream(final InputStream inputStream, String type) {
         if (inputStream != null) {
             Writer writer = new StringWriter();
             int buffer_size = 1024;
@@ -41,7 +41,7 @@ public class Utilities {
         return null;
     }
 
-    public static String formatStatus(String last_start){
+    public static String formatStatus(String last_start) {
         return "Sist skrudd på " + last_start;
     }
 }
