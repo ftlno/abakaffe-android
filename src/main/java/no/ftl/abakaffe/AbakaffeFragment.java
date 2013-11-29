@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by fredrik on 29.11.13.
@@ -61,18 +67,13 @@ public class AbakaffeFragment extends Fragment {
 
     private class UpdateStatusTask extends AsyncTask<Void, Object, JSONObject> {
 
-
         protected JSONObject doInBackground(final Void... params) {
 
             return NetworkOperations.updateStatus();
         }
 
         protected void onPostExecute(JSONObject result) {
-
-            String toastText = "";
-
             if (result != null) {
-
                 try {
                     boolean status = result.getBoolean("status");
                     if (status) {
@@ -80,19 +81,18 @@ public class AbakaffeFragment extends Fragment {
                     } else {
                         powerTextView.setText(getText(R.string.power_off));
                     }
-
                     String last_start = result.getString("last_start");
-                    Log.d(TAG, last_start);
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                    Date now = new Date();
+                    Date last = df.parse(last_start);
+                    long seconds = (now.getTime() - last.getTime()) / 1000;
+                    long mins = seconds / 60;
+                    long hours = seconds / 3600;
                     statusTextView.setText(Utilities.formatStatus(last_start));
-                    toastText = "Oppdatert";
-                } catch (Exception e) {
-                    toastText = "Oppdatering feilet";
+                } catch (JSONException e) {
+                } catch (ParseException e){
                 }
-            } else {
-                toastText = "Oppdatering feilet";
             }
-            Toast.makeText(context, toastText,
-                    Toast.LENGTH_LONG).show();
         }
     }
 }
