@@ -2,8 +2,10 @@ package no.ftl.abakaffe;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import org.json.JSONObject;
  */
 
 public class AbakaffeFragment extends Fragment {
+
+    private static final String TAG = "AbakaffeFragment";
 
     protected Context context;
     private Button updateButton;
@@ -50,10 +54,13 @@ public class AbakaffeFragment extends Fragment {
             }
         });
 
+        powerTextView.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto-li.ttf"));
+
         return view;
     }
 
     private class UpdateStatusTask extends AsyncTask<Void, Object, JSONObject> {
+
 
         protected JSONObject doInBackground(final Void... params) {
 
@@ -75,6 +82,7 @@ public class AbakaffeFragment extends Fragment {
                     }
 
                     String last_start = result.getString("last_start");
+                    Log.d(TAG, last_start);
                     statusTextView.setText(Utilities.formatStatus(last_start));
                     toastText = "Oppdatert";
                 } catch (Exception e) {
