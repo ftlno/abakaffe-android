@@ -2,12 +2,7 @@ package no.ftl.abakaffe;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 
 /**
  * Created by fredrik on 29.11.13.
@@ -44,4 +39,10 @@ public class Utilities {
     public static String formatStatus(String last_start) {
         return "Sist skrudd på " + last_start;
     }
+
+    public static String formatStatus(long h, long m, long s) {
+        return String.format("Skrudd på for %d time%s, \n%d minutt%s, og \n%d sekund%s siden. "
+                , h, h == 1 ? "":"r", m, m==1?"":"er", s, m==1?"":"er");
+    }
+
 }
