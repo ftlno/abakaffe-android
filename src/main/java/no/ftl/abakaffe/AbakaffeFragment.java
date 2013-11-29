@@ -107,7 +107,7 @@ public class AbakaffeFragment extends Fragment {
                     hoursTextView.setText(hours + "");
                     minutesTextView.setText(mins + "");
                     secondsTextView.setText(seconds + "");
-                    statusTextView.setVisibility(View.GONE);
+                    statusTextView.setText(getText(R.string.timesince));
                 } catch (JSONException e) {
                 } catch (ParseException e) {
                 }

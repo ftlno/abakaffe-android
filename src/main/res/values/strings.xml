@@ -12,4 +12,5 @@
     <string name="hours">Timer</string>
     <string name="seconds">Sekunder</string>
     <string name="minutes">Minutter</string>
+    <string name="timesince">Tid siden kaffetrakteren ble skrudd på</string>
 </resources>
