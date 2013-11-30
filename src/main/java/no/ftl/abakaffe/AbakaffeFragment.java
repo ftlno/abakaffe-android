@@ -43,6 +43,7 @@ public class AbakaffeFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
 		View view = inflater.inflate(R.layout.fragment_main, container, false);
 
 		statusTextView = (TextView) view.findViewById(R.id.status_textview);
@@ -70,6 +71,7 @@ public class AbakaffeFragment extends Fragment {
 	}
 
 	private void updatePowerStatus(boolean status) {
+
 		SpannableStringBuilder stringBuilder = new SpannableStringBuilder(getText(R.string.power));
 		if (status) {
 			stringBuilder.append(" på");
@@ -85,6 +87,7 @@ public class AbakaffeFragment extends Fragment {
 	}
 
 	private void updateTimeLeft(String last_start) {
+
 		try {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 			Date now = new Date();
@@ -107,6 +110,7 @@ public class AbakaffeFragment extends Fragment {
 	}
 
 	private void updateView(JSONObject coffee) {
+
 		try {
 			updatePowerStatus(coffee.getBoolean("status"));
 			updateTimeLeft(coffee.getString("last_start"));
@@ -119,7 +123,6 @@ public class AbakaffeFragment extends Fragment {
 	private class UpdateStatusTask extends AsyncTask<Void, Object, JSONObject> {
 
 		protected JSONObject doInBackground(final Void... params) {
-
 			return NetworkOperations.updateStatus();
 		}
 

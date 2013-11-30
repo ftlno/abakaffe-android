@@ -1,5 +1,7 @@
 package no.ftl.abakaffe;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -7,14 +9,13 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import org.json.JSONObject;
-
 /**
  * Created by fredrik on 29.11.13.
  */
 
 public class Utilities {
 	public static JSONObject getJsonFromInputStream(final InputStream inputStream, String type) {
+
 		if (inputStream != null) {
 			Writer writer = new StringWriter();
 			int buffer_size = 1024;
