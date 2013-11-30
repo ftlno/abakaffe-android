@@ -14,25 +14,26 @@ import java.io.InputStream;
 
 public class NetworkOperations {
 
-    public static String STATUS_URL = "http://kaffe.abakus.no/api/status";
+	public static String STATUS_URL = "http://kaffe.abakus.no/api/status";
 
-    public static JSONObject updateStatus() {
-        return Utilities.getJsonFromInputStream(getRequest(STATUS_URL), "coffee");
-    }
+	public static JSONObject updateStatus() {
+		return Utilities.getJsonFromInputStream(getRequest(STATUS_URL), "coffee");
+	}
 
-    private static InputStream getRequest(String url) {
+	private static InputStream getRequest(String url) {
 
-        InputStream content = null;
-        try {
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpResponse response = httpclient.execute(new HttpGet(url));
-            content = response.getEntity().getContent();
+		InputStream content = null;
+		try {
+			HttpClient httpclient = new DefaultHttpClient();
+			HttpResponse response = httpclient.execute(new HttpGet(url));
+			content = response.getEntity().getContent();
 
-        } catch (Exception e) {
-            return null;
-        }
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 
-        return content;
+		return content;
 
-    }
+	}
 }

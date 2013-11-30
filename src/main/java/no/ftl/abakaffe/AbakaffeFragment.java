@@ -1,5 +1,12 @@
 package no.ftl.abakaffe;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -12,12 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by fredrik on 29.11.13.
@@ -25,93 +26,107 @@ import java.util.Date;
 
 public class AbakaffeFragment extends Fragment {
 
-    private static final String TAG = "AbakaffeFragment";
+	private static final String TAG = "AbakaffeFragment";
+	protected Context context;
+	private Button updateButton;
+	private TextView statusTextView, powerTextView, hoursTextView, minutesTextView, secondsTextView;
 
-    protected Context context;
-    private Button updateButton;
-    private TextView statusTextView, powerTextView, hoursTextView, minutesTextView, secondsTextView;
+	public AbakaffeFragment(Context context) {
+		this.context = context;
+	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		new UpdateStatusTask().execute();
+	}
 
-    public AbakaffeFragment(Context context) {
-        this.context = context;
-    }
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        new UpdateStatusTask().execute();
-    }
+		statusTextView = (TextView) view.findViewById(R.id.status_textview);
+		powerTextView = (TextView) view.findViewById(R.id.power_textview);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+		hoursTextView = (TextView) view.findViewById(R.id.hours);
+		minutesTextView = (TextView) view.findViewById(R.id.minutes);
+		secondsTextView = (TextView) view.findViewById(R.id.seconds);
 
-        statusTextView = (TextView) view.findViewById(R.id.status_textview);
-        powerTextView = (TextView) view.findViewById(R.id.power_textview);
+		updateButton = (Button) view.findViewById(R.id.update_button);
+		updateButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				new UpdateStatusTask().execute();
+			}
+		});
 
-        hoursTextView = (TextView) view.findViewById(R.id.hours);
-        minutesTextView = (TextView) view.findViewById(R.id.minutes);
-        secondsTextView = (TextView) view.findViewById(R.id.seconds);
+		Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto-li.ttf");
+		powerTextView.setTypeface(roboto);
+		hoursTextView.setTypeface(roboto);
+		minutesTextView.setTypeface(roboto);
+		secondsTextView.setTypeface(roboto);
 
-        updateButton = (Button) view.findViewById(R.id.update_button);
-        updateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new UpdateStatusTask().execute();
-            }
-        });
+		return view;
+	}
 
-        Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto-li.ttf");
-        powerTextView.setTypeface(roboto);
-        hoursTextView.setTypeface(roboto);
-        minutesTextView.setTypeface(roboto);
-        secondsTextView.setTypeface(roboto);
+	private void updatePowerStatus(boolean status) {
+		SpannableStringBuilder stringBuilder = new SpannableStringBuilder(getText(R.string.power));
+		if (status) {
+			stringBuilder.append(" på");
+			stringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.green)), stringBuilder.length() - 2,
+					stringBuilder.length(), 0);
+		} else {
+			stringBuilder.append(" av");
+			stringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.red)), stringBuilder.length() - 2,
+					stringBuilder.length(), 0);
+		}
 
-        return view;
-    }
+		powerTextView.setText(stringBuilder, TextView.BufferType.SPANNABLE);
+	}
 
-    private class UpdateStatusTask extends AsyncTask<Void, Object, JSONObject> {
+	private void updateTimeLeft(String last_start) {
+		try {
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+			Date now = new Date();
+			Date last = df.parse(last_start);
+			long diff = (now.getTime() - last.getTime()) / 1000;
+			long hours = diff / 3600;
+			diff -= hours * 3600;
+			long mins = diff / 60;
+			diff -= mins * 60;
+			long seconds = diff;
 
-        protected JSONObject doInBackground(final Void... params) {
+			hoursTextView.setText(hours + "");
+			minutesTextView.setText(mins + "");
+			secondsTextView.setText(seconds + "");
+			statusTextView.setText(getText(R.string.timesince));
 
-            return NetworkOperations.updateStatus();
-        }
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
 
-        protected void onPostExecute(JSONObject result) {
-            if (result != null) {
-                try {
-                    boolean status = result.getBoolean("status");
+	private void updateView(JSONObject coffee) {
+		try {
+			updatePowerStatus(coffee.getBoolean("status"));
+			updateTimeLeft(coffee.getString("last_start"));
 
-                    SpannableStringBuilder stringBuilder = new SpannableStringBuilder(getText(R.string.power));
-                    if (status) {
-                        stringBuilder.append(" på");
-                        stringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.green)), stringBuilder.length() - 2, stringBuilder.length(), 0);
-                    } else {
-                        stringBuilder.append(" av");
-                        stringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.red)), stringBuilder.length() - 2, stringBuilder.length(), 0);
-                    }
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
 
-                    powerTextView.setText(stringBuilder, TextView.BufferType.SPANNABLE);
+	private class UpdateStatusTask extends AsyncTask<Void, Object, JSONObject> {
 
-                    String last_start = result.getString("last_start");
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-                    Date now = new Date();
-                    Date last = df.parse(last_start);
-                    long diff = (now.getTime() - last.getTime()) / 1000;
-                    long hours = diff / 3600;
-                    diff -= hours * 3600;
-                    long mins = diff / 60;
-                    diff -= mins * 60;
-                    long seconds = diff;
-                    hoursTextView.setText(hours + "");
-                    minutesTextView.setText(mins + "");
-                    secondsTextView.setText(seconds + "");
-                    statusTextView.setText(getText(R.string.timesince));
-                } catch (JSONException e) {
-                } catch (ParseException e) {
-                }
-            }
-        }
-    }
+		protected JSONObject doInBackground(final Void... params) {
+
+			return NetworkOperations.updateStatus();
+		}
+
+		protected void onPostExecute(JSONObject result) {
+			if (result != null) {
+				updateView(result);
+			}
+		}
+	}
 }
