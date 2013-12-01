@@ -1,12 +1,12 @@
 package no.ftl.abakaffe;
 
+import java.io.InputStream;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
-
-import java.io.InputStream;
 
 /**
  * Created by fredrik on 29.11.13.
