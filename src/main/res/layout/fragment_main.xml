@@ -1,154 +1,118 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity$AbakaffeFragment">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                tools:context=".MainActivity$AbakaffeFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/power_placeholder"
-        android:id="@+id/power_textview"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/grey_light"
-        android:textSize="@dimen/text_large" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/status_placeholder"
-        android:id="@+id/status_textview"
-        android:textColor="@color/grey_dark"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentLeft="false"
-        android:layout_below="@+id/power_textview"
-        android:paddingBottom="0dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp" />
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/status_textview"
-        android:layout_above="@+id/linearLayout"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="@dimen/activity_horizontal_margin">
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:layout_margin="0dp"
-            android:padding="0dp"
-            android:id="@+id/tableRow">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_godzilla"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="1"
-                android:id="@+id/hours"
-                android:typeface="normal"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/hours"
-                android:id="@+id/textView2"
-                android:textColor="@color/grey_light" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="0dp"
-            android:paddingLeft="@dimen/margin_large"
-            android:layout_marginLeft="@dimen/indent"
-            android:layout_below="@+id/tableRow2"
-            android:layout_alignLeft="@+id/tableRow2">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="3"
-                android:textSize="@dimen/text_huge"
-                android:id="@+id/seconds"
-                android:typeface="normal"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/seconds"
-                android:id="@+id/textView4"
-                android:textColor="@color/grey_light" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tableRow2"
-            android:padding="0dp"
-            android:layout_below="@+id/tableRow"
-            android:layout_alignLeft="@+id/tableRow"
-            android:layout_marginLeft="@dimen/indent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="2"
-                android:textSize="@dimen/text_crazy"
-                android:id="@+id/minutes"
-                android:typeface="normal"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/minutes"
-                android:id="@+id/textView6"
-                android:textColor="@color/grey_light" />
-
-        </TableRow>
-
-    </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:showDividers="beginning"
-        android:layout_alignParentBottom="true"
-        android:divider="@android:drawable/divider_horizontal_bright"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout">
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:background="?android:attr/selectableItemBackground"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.Button"
-            android:padding="10dp"
-            android:layout_height="wrap_content"
-            android:text="@string/update_button"
-            android:id="@+id/update_button"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true" />
+        <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="25">
+
+        </FrameLayout>
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/status_box"
+                android:layout_gravity="center"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/status_field"
+                android:alpha="1">
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/defaultStatus"
+                    android:id="@+id/status_text"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="12dp"
+                    android:textColor="@color/redOnWhite"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="24dp" />
+        </FrameLayout>
+
+        <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"></FrameLayout>
 
     </LinearLayout>
 
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="15"></TableRow>
+
+        <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:layout_width="212dp"
+                    android:layout_height="218dp"
+                    android:id="@+id/imageView"
+                    android:src="@drawable/reload_icon_bg"
+                    android:layout_gravity="center_horizontal" />
+
+            <ImageView
+                    android:layout_width="212dp"
+                    android:layout_height="218dp"
+                    android:id="@+id/reload_icon"
+                    android:src="@drawable/reload_icon"
+                    android:layout_gravity="center_horizontal" />
+
+        </FrameLayout>
+
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"></TableRow>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="25"></FrameLayout>
+
+        <ImageView
+                android:layout_width="301dp"
+                android:layout_height="219dp"
+                android:id="@+id/coffee_cup"
+                android:src="@drawable/coffee"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="337dp" />
+
+        <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="20"></FrameLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
