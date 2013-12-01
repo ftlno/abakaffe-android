@@ -6,11 +6,13 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -21,15 +23,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by fredrik on 29.11.13.
+ * Created by fredrik on 29.11.13. Updated by Khrall on 1.12.13
  */
 
 public class AbakaffeFragment extends Fragment {
 
 	private static final String TAG = "AbakaffeFragment";
+
 	protected Context context;
-	private Button updateButton;
-	private TextView statusTextView, powerTextView, hoursTextView, minutesTextView, secondsTextView;
+	private TextView statusText, footerText;
+	private FrameLayout statusField;
+	private int statusFieldPosition = 0;
 
 	public AbakaffeFragment(Context context) {
 		this.context = context;
@@ -43,80 +47,115 @@ public class AbakaffeFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
 		View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-		statusTextView = (TextView) view.findViewById(R.id.status_textview);
-		powerTextView = (TextView) view.findViewById(R.id.power_textview);
+		ImageView coffee_cup = (ImageView) view.findViewById(R.id.coffee_cup);
+		slideInCoffeeCup(coffee_cup);
+		CoffeeTouchListener coffeeTouch = new CoffeeTouchListener();
+		coffeeTouch.setReloadIcon((ImageView) view.findViewById(R.id.reload_icon));
+		coffee_cup.setOnTouchListener(coffeeTouch);
 
-		hoursTextView = (TextView) view.findViewById(R.id.hours);
-		minutesTextView = (TextView) view.findViewById(R.id.minutes);
-		secondsTextView = (TextView) view.findViewById(R.id.seconds);
-
-		updateButton = (Button) view.findViewById(R.id.update_button);
-		updateButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				new UpdateStatusTask().execute();
-			}
-		});
-
-		Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/roboto-li.ttf");
-		powerTextView.setTypeface(roboto);
-		hoursTextView.setTypeface(roboto);
-		minutesTextView.setTypeface(roboto);
-		secondsTextView.setTypeface(roboto);
+		Typeface openSans = Typeface.createFromAsset(getActivity().getAssets(), "fonts/OpenSans-Bold.ttf");
+		statusText = (TextView) view.findViewById(R.id.status_text);
+		statusText.setTypeface(openSans);
+		footerText = (TextView) getActivity().findViewById(R.id.footer_text);
+		statusField = (FrameLayout) view.findViewById(R.id.status_field);
 
 		return view;
 	}
 
-	private void updatePowerStatus(boolean status) {
-
-		SpannableStringBuilder stringBuilder = new SpannableStringBuilder(getText(R.string.power));
-		if (status) {
-			stringBuilder.append(" på");
-			stringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.green)), stringBuilder.length() - 2,
-					stringBuilder.length(), 0);
-		} else {
-			stringBuilder.append(" av");
-			stringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.red)), stringBuilder.length() - 2,
-					stringBuilder.length(), 0);
-		}
-
-		powerTextView.setText(stringBuilder, TextView.BufferType.SPANNABLE);
+	private void slideInCoffeeCup(ImageView coffee_cup) {
+		coffee_cup.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+		float width = coffee_cup.getMeasuredWidth();
+		coffee_cup.animate().translationX(width).setDuration(1000);
 	}
 
-	private void updateTimeLeft(String last_start) {
+	private class CoffeeTouchListener implements View.OnTouchListener {
+		private ImageView reloadIcon;
+		private float originY, offsetY, startY;
+		private boolean dragging = false;
 
-		try {
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-			Date now = new Date();
-			Date last = df.parse(last_start);
-			long diff = (now.getTime() - last.getTime()) / 1000;
-			long hours = diff / 3600;
-			diff -= hours * 3600;
-			long mins = diff / 60;
-			diff -= mins * 60;
-			long seconds = diff;
+		public void setReloadIcon(ImageView reloadIcon) {
+			this.reloadIcon = reloadIcon;
+		}
 
-			hoursTextView.setText(hours + "");
-			minutesTextView.setText(mins + "");
-			secondsTextView.setText(seconds + "");
-			statusTextView.setText(getText(R.string.timesince));
+		@Override
+		public boolean onTouch(View view, MotionEvent motionEvent) {
+			switch (motionEvent.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				if (!dragging) {
+					reloadIcon.animate().alpha(0).rotation(0).setDuration(0);
+					originY = view.getTop();
+					startY = motionEvent.getRawY();
+					offsetY = startY - originY;
+					dragging = true;
+					Log.i("Coffee", "Started dragging");
+					return true;
+				}
+				break;
+			case MotionEvent.ACTION_MOVE:
+				if (dragging) {
+					float dy = motionEvent.getRawY();
+					// if(dy - startY > 0) {
+					float alpha = (float) (1 - 1000 / Math.pow(dy - startY, 2));
+					view.animate().y(dy - offsetY).setDuration(0);
+					reloadIcon.animate().alpha(alpha).rotation(dy).setDuration(0);
+					return true;
+					// }
+				}
+				break;
 
-		} catch (ParseException e) {
-			e.printStackTrace();
+			case MotionEvent.ACTION_UP:
+				if (dragging) {
+					dragging = false;
+					float angle = reloadIcon.getRotation();
+					view.animate().y(originY).setDuration(300);
+					reloadIcon.animate().alpha(0).rotation(angle + 180).setDuration(300);
+					Log.i("Coffee", "Stopped dragging");
+
+					if (Math.abs(motionEvent.getRawY() - startY) > 200) {
+						Log.i("Coffee", "Attempted to update text");
+						statusField.animate().y(statusFieldPosition + 1000).setDuration(0);
+						new UpdateStatusTask().execute();
+					}
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 
 	private void updateView(JSONObject coffee) {
+		if (statusFieldPosition == 0) {
+			statusFieldPosition = statusField.getTop();
+		}
 
-		try {
-			updatePowerStatus(coffee.getBoolean("status"));
-			updateTimeLeft(coffee.getString("last_start"));
+		if (coffee != null) {
+			try {
+				boolean status = coffee.getBoolean("status");
 
-		} catch (JSONException e) {
-			e.printStackTrace();
+				SpannableStringBuilder stringBuilder = new SpannableStringBuilder(getText(R.string.power));
+				if (status) {
+					stringBuilder.append(" PÅ");
+				} else {
+					stringBuilder.append(" AV");
+				}
+
+				statusText.setText(stringBuilder, TextView.BufferType.SPANNABLE);
+				statusField.animate().y(statusFieldPosition).setDuration(1000);
+
+				String last_start = coffee.getString("last_start");
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+				SimpleDateFormat out = new SimpleDateFormat("hh:mm");
+				Date last = df.parse(last_start);
+
+				footerText.setText(getText(R.string.details) + " " + out.format(last));
+
+			} catch (JSONException e) {
+			} catch (ParseException e) {
+			}
+		} else {
+			footerText.setText(getText(R.string.defaultFooterText));
 		}
 	}
 
@@ -127,9 +166,7 @@ public class AbakaffeFragment extends Fragment {
 		}
 
 		protected void onPostExecute(JSONObject result) {
-			if (result != null) {
-				updateView(result);
-			}
+			updateView(result);
 		}
 	}
 }

@@ -1,9 +1,80 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    tools:ignore="MergeRootFrame">
+             xmlns:tools="http://schemas.android.com/tools"
+             android:id="@+id/container"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".MainActivity"
+             tools:ignore="MergeRootFrame"
+             android:background="@color/background">
 
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left|top"
+            android:layout_marginBottom="-45dp"
+            android:id="@+id/content">
+
+        <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/header"
+                android:id="@+id/header"
+                android:layout_marginTop="-100dp">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal">
+
+                <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/abakule"
+                        android:layout_weight="1"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginBottom="1dp"></FrameLayout>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"
+                        android:gravity="center"
+                        android:id="@+id/header_text"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:textColor="@color/white"
+                        android:textSize="25dp"
+                        android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/footer"
+                android:background="@color/gray"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:measureAllChildren="false">
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/defaultFooterText"
+                    android:id="@+id/footer_text"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/onGrayText"
+                    android:textSize="18dp" />
+        </FrameLayout>
+
+    </RelativeLayout>
 </FrameLayout>
+
