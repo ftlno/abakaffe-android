@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -33,7 +34,7 @@ public class AbakaffeFragment extends Fragment {
 
 	protected Context context;
 	private TextView statusText, footerText;
-	private FrameLayout statusField;
+	private RelativeLayout statusField;
 	private int statusFieldPosition = 0;
 
     public AbakaffeFragment(){
@@ -64,7 +65,7 @@ public class AbakaffeFragment extends Fragment {
 		statusText = (TextView) view.findViewById(R.id.status_text);
 		statusText.setTypeface(openSans);
 		footerText = (TextView) getActivity().findViewById(R.id.footer_text);
-		statusField = (FrameLayout) view.findViewById(R.id.status_field);
+		statusField = (RelativeLayout) view.findViewById(R.id.status_field);
 
 		return view;
 	}
@@ -72,7 +73,8 @@ public class AbakaffeFragment extends Fragment {
 	private void slideInCoffeeCup(ImageView coffee_cup) {
 		coffee_cup.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
 		float width = coffee_cup.getMeasuredWidth();
-		coffee_cup.animate().translationX(width).setDuration(1000);
+        coffee_cup.setTranslationX(-width);
+		coffee_cup.animate().translationX(0).setDuration(1000);
 	}
 
 	private class CoffeeTouchListener implements View.OnTouchListener {

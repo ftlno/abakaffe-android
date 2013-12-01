@@ -6,7 +6,15 @@
     <dimen name="margin_small">4dp</dimen>
     <dimen name="margin_medium">8dp</dimen>
     <dimen name="margin_large">12dp</dimen>
+    <dimen name="margin_huge">16dp</dimen>
     <dimen name="indent">24dp</dimen>
 
     <dimen name="text_normal">18sp</dimen>
+    <dimen name="text_large">24sp</dimen>
+
+    <dimen name="kaffe">240dp</dimen>
+    <dimen name="kaffe_offset">36dp</dimen> <!-- for at center til imageview skal være center til kaffen. -->
+
+    <dimen name="divider_height">8dp</dimen>
 </resources>
+

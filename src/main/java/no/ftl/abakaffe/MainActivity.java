@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -18,7 +19,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		FrameLayout header = (FrameLayout) findViewById(R.id.header);
+		LinearLayout header = (LinearLayout) findViewById(R.id.header);
 		FrameLayout footer = (FrameLayout) findViewById(R.id.footer);
 
 		header.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
@@ -27,8 +28,11 @@ public class MainActivity extends Activity {
 		float headerHeight = header.getMeasuredHeight();
 		float footerHeight = footer.getMeasuredHeight();
 
-		header.animate().translationY(headerHeight).setDuration(700);
-		footer.animate().translationY(-footerHeight).setDuration(700);
+        header.setTranslationY(-headerHeight);
+        footer.setTranslationY(footerHeight);
+
+		header.animate().translationY(0).setDuration(700);
+		footer.animate().translationY(0).setDuration(700);
 
 		TextView headerText = (TextView) findViewById(R.id.header_text);
 		TextView footerText = (TextView) findViewById(R.id.footer_text);

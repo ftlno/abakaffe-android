@@ -4,115 +4,67 @@
                 android:layout_height="fill_parent"
                 tools:context=".MainActivity$AbakaffeFragment">
 
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/status_box"
+            android:layout_gravity="center"
+            android:id="@+id/status_field"
+            android:layout_below="@+id/frameLayout"
+            android:paddingBottom="@dimen/margin_large"
+            android:paddingLeft="@dimen/margin_large"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingRight="@dimen/margin_large"
+            android:gravity="center"
+            android:layout_centerHorizontal="true">
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-        <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="25">
-
-        </FrameLayout>
-
-        <FrameLayout
+        <!-- tekst -->
+        <TextView
+                android:id="@+id/status_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/status_box"
-                android:layout_gravity="center"
-                android:layout_alignParentBottom="false"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentTop="false"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:id="@+id/status_field"
-                android:alpha="1">
+                android:gravity="center"
+                android:text="@string/defaultStatus"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_large"/>
+    </RelativeLayout>
 
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/defaultStatus"
-                    android:id="@+id/status_text"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="12dp"
-                    android:textColor="@color/gray"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:textSize="24dp" />
-        </FrameLayout>
-
-        <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="10"></FrameLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:orientation="vertical"
+    <!-- Kaffe -->
+    <FrameLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="15"></TableRow>
-
-        <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-            <ImageView
-                    android:layout_width="212dp"
-                    android:layout_height="218dp"
-                    android:id="@+id/imageView"
-                    android:src="@drawable/reload_icon_bg"
-                    android:layout_gravity="center_horizontal" />
-
-            <ImageView
-                    android:layout_width="212dp"
-                    android:layout_height="218dp"
-                    android:id="@+id/reload_icon"
-                    android:src="@drawable/reload_icon"
-                    android:layout_gravity="center_horizontal" />
-
-        </FrameLayout>
-
-        <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="20"></TableRow>
-    </LinearLayout>
-
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-        <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="25"></FrameLayout>
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_centerInParent="true"
+            android:id="@+id/frameLayout">
 
         <ImageView
-                android:layout_width="301dp"
-                android:layout_height="219dp"
-                android:id="@+id/coffee_cup"
-                android:src="@drawable/coffee"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="center"
-                android:layout_marginRight="337dp" />
+                android:layout_width="212dp"
+                android:layout_height="218dp"
+                android:id="@+id/imageView"
+                android:src="@drawable/reload_icon_bg"
+                android:layout_gravity="center_horizontal"/>
 
-        <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="20"></FrameLayout>
+        <ImageView
+                android:layout_width="212dp"
+                android:layout_height="218dp"
+                android:id="@+id/reload_icon"
+                android:src="@drawable/reload_icon"
+                android:layout_gravity="center_horizontal"/>
 
-    </LinearLayout>
+    </FrameLayout>
+
+    <ImageView
+            android:layout_width="@dimen/kaffe"
+            android:layout_height="@dimen/kaffe"
+            android:id="@+id/coffee_cup"
+            android:src="@drawable/coffee"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:paddingRight="@dimen/kaffe_offset"/>
+
+    <!-- reload -->
 
 </RelativeLayout>
