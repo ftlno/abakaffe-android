@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -139,11 +140,13 @@ public class AbakaffeFragment extends Fragment {
 				boolean status = coffee.getBoolean("status");
 
 				SpannableStringBuilder stringBuilder = new SpannableStringBuilder(getText(R.string.power));
-				if (status) {
-					stringBuilder.append(" PÅ");
-				} else {
-					stringBuilder.append(" AV");
-				}
+                if (status) {
+                    stringBuilder.append(" PÅ");
+                    stringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.green)), stringBuilder.length() - 2, stringBuilder.length(), 0);
+                } else {
+                    stringBuilder.append(" AV");
+                    stringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.red)), stringBuilder.length() - 2, stringBuilder.length(), 0);
+                }
 
 				statusText.setText(stringBuilder, TextView.BufferType.SPANNABLE);
 				statusField.animate().y(statusFieldPosition).setDuration(1000);

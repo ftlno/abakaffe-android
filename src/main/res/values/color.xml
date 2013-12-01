@@ -8,4 +8,9 @@
     <color name="onGrayText">#525252</color>
     <color name="redOnWhite">#aa554f</color>
     <color name="abakule">#b11b11</color>
+
+    <color name="grey">#555555</color>
+
+    <color name="green">#99cc00</color>
+    <color name="red">#ff4444</color>
 </resources>
