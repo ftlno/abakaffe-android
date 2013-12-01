@@ -35,6 +35,10 @@ public class AbakaffeFragment extends Fragment {
 	private FrameLayout statusField;
 	private int statusFieldPosition = 0;
 
+    public AbakaffeFragment(){
+        context = getActivity();
+    }
+
 	public AbakaffeFragment(Context context) {
 		this.context = context;
 	}
