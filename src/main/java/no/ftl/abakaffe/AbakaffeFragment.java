@@ -155,7 +155,7 @@ public class AbakaffeFragment extends Fragment {
 
 				String last_start = coffee.getString("last_start");
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-				SimpleDateFormat out = new SimpleDateFormat("hh:mm");
+				SimpleDateFormat out = new SimpleDateFormat("kk:mm");
 				Date last = df.parse(last_start);
 
 				footerText.setText(getText(R.string.details) + " " + out.format(last));
