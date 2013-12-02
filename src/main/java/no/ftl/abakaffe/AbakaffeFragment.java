@@ -100,7 +100,7 @@ public class AbakaffeFragment extends Fragment {
 				long hours = coffee.getJSONObject("time_since").getLong("hours");
 				long minutes = coffee.getJSONObject("time_since").getLong("minutes");
 
-				footerText.setText(Utilities.formatStatus(hours, minutes));
+				footerText.setText(Utilities.formatStatus(getResources(), hours, minutes));
 
 			} catch (JSONException e) {
 				e.printStackTrace();

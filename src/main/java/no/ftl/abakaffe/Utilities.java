@@ -1,5 +1,7 @@
 package no.ftl.abakaffe;
 
+import android.content.Context;
+import android.content.res.Resources;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -42,16 +44,16 @@ public class Utilities {
 		return null;
 	}
 
-	public static String formatStatus(long hours, long mins) {
+	public static String formatStatus(Resources res, long hours, long mins) {
 
 		if (hours >= 24) {
-			return "Sist skrudd på for mer enn et døgn siden.";
+			return res.getString(R.string.turnedOnMoreThanDay);
 		} else if (hours > 0) {
-			return "Sist skrudd på for mer enn en time siden.";
+            return res.getString(R.string.turnedOnMoreThanHour);
 		} else if (mins == 1) {
-			return "Sist skrudd på for ett minutt siden.";
+            return res.getString(R.string.turnedOnOneMinue);
 		} else {
-			return "Sist skrudd på for " + mins + " minutter siden.";
+            return String.format(res.getString(R.string.turnedOnMinutes), mins);
 		}
 	}
 }

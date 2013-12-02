@@ -17,4 +17,9 @@
 
     <string name="defaultStatus">Kaffetrakter ??</string>
     <string name="defaultFooterText">Kunne ikke hente informasjon..</string>
+
+    <string name="turnedOnMoreThanDay">Sist skrudd på for mer enn et døgn siden.</string>
+    <string name="turnedOnMoreThanHour">Sis skrudd på for mer enn en time siden.</string>
+    <string name="turnedOnMinutes">Sist skrudd på for %d minutter siden.</string>
+    <string name="turnedOnOneMinue">Sist skrudd på for ett minutt siden.</string>
 </resources>
