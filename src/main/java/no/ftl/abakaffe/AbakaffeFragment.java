@@ -12,17 +12,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by fredrik on 29.11.13. Updated by Khrall on 1.12.13
@@ -103,12 +98,10 @@ public class AbakaffeFragment extends Fragment {
 			case MotionEvent.ACTION_MOVE:
 				if (dragging) {
 					float dy = motionEvent.getRawY();
-					// if(dy - startY > 0) {
 					float alpha = (float) (1 - 1000 / Math.pow(dy - startY, 2));
 					view.animate().y(dy - offsetY).setDuration(0);
 					reloadIcon.animate().alpha(alpha).rotation(dy).setDuration(0);
 					return true;
-					// }
 				}
 				break;
 
@@ -154,14 +147,10 @@ public class AbakaffeFragment extends Fragment {
 				statusField.animate().y(statusFieldPosition).setDuration(1000);
 
 				String last_start = coffee.getString("last_start");
-				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-				SimpleDateFormat out = new SimpleDateFormat("kk:mm");
-				Date last = df.parse(last_start);
-
-				footerText.setText(getText(R.string.details) + " " + out.format(last));
+                footerText.setText(Utilities.formatStatus(last_start,context));
 
 			} catch (JSONException e) {
-			} catch (ParseException e) {
+                e.printStackTrace();
 			}
 		} else {
 			footerText.setText(getText(R.string.defaultFooterText));
