@@ -1,15 +1,13 @@
 package no.ftl.abakaffe;
 
-import android.content.Context;
-import android.content.res.Resources;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+
+import org.json.JSONObject;
 
 /**
  * Created by fredrik on 29.11.13.
@@ -42,18 +40,5 @@ public class Utilities {
 			}
 		}
 		return null;
-	}
-
-	public static String formatStatus(Resources res, long hours, long mins) {
-
-		if (hours >= 24) {
-			return res.getString(R.string.turnedOnMoreThanDay);
-		} else if (hours > 0) {
-            return res.getString(R.string.turnedOnMoreThanHour);
-		} else if (mins == 1) {
-            return res.getString(R.string.turnedOnOneMinue);
-		} else {
-            return String.format(res.getString(R.string.turnedOnMinutes), mins);
-		}
 	}
 }

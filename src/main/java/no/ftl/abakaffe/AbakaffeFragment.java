@@ -2,6 +2,7 @@ package no.ftl.abakaffe;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -97,10 +98,23 @@ public class AbakaffeFragment extends Fragment {
 				statusText.setText(stringBuilder, TextView.BufferType.SPANNABLE);
 				statusField.animate().y(statusFieldPosition).setDuration(1000);
 
-				long hours = coffee.getJSONObject("time_since").getLong("hours");
-				long minutes = coffee.getJSONObject("time_since").getLong("minutes");
+				String statusText = "";
+				Resources res = getResources();
 
-				footerText.setText(Utilities.formatStatus(getResources(), hours, minutes));
+                long hours = coffee.getJSONObject("time_since").getLong("hours");
+                long minutes = coffee.getJSONObject("time_since").getLong("minutes");
+
+				if (hours >= 24) {
+					statusText = res.getString(R.string.turnedOnMoreThanDay);
+				} else if (hours > 0) {
+					statusText = res.getString(R.string.turnedOnMoreThanHour);
+				} else if (minutes == 1) {
+					statusText = res.getString(R.string.turnedOnOneMinue);
+				} else {
+					statusText = String.format(res.getString(R.string.turnedOnMinutes), minutes);
+				}
+
+				footerText.setText(statusText);
 
 			} catch (JSONException e) {
 				e.printStackTrace();

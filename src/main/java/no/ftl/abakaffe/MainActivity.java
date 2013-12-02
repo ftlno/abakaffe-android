@@ -28,8 +28,8 @@ public class MainActivity extends Activity {
 		float headerHeight = header.getMeasuredHeight();
 		float footerHeight = footer.getMeasuredHeight();
 
-        header.setTranslationY(-headerHeight);
-        footer.setTranslationY(footerHeight);
+		header.setTranslationY(-headerHeight);
+		footer.setTranslationY(footerHeight);
 
 		header.animate().translationY(0).setDuration(700);
 		footer.animate().translationY(0).setDuration(700);
