@@ -55,16 +55,18 @@ public class Utilities {
 			Date last = df.parse(last_start);
 
 			long diff = (now.getTime() - last.getTime()) / 1000;
-            long hours = diff / 3600;
-            long mins = diff / 60;
+			long hours = diff / 3600;
+			long mins = diff / 60;
 
 			if (hours >= 24) {
 				return "Sist skrudd på for mer enn et døgn siden.";
-			}else if(hours > 0){
-                return "Sist skrudd på for mer enn en time siden.";
-            }
-
-			return "Sist skrudd på for " + mins + " minutter siden.";
+			} else if (hours > 0) {
+				return "Sist skrudd på for mer enn en time siden.";
+			} else if (mins == 1) {
+				return "Sist skrudd på for " + mins + " minutt siden.";
+			} else {
+				return "Sist skrudd på for " + mins + " minutter siden.";
+			}
 
 		} catch (ParseException e) {
 			e.printStackTrace();
