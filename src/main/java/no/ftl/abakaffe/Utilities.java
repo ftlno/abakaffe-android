@@ -1,7 +1,5 @@
 package no.ftl.abakaffe;
 
-import android.content.Context;
-
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -44,7 +42,7 @@ public class Utilities {
 		return null;
 	}
 
-	public static String formatStatus(long hours, long mins, Context context) {
+	public static String formatStatus(long hours, long mins) {
 
 		if (hours >= 24) {
 			return "Sist skrudd på for mer enn et døgn siden.";
