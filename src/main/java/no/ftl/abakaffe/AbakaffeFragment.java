@@ -99,19 +99,18 @@ public class AbakaffeFragment extends Fragment {
 				statusField.animate().y(statusFieldPosition).setDuration(1000);
 
 				String statusText = "";
-				Resources res = getResources();
 
                 long hours = coffee.getJSONObject("time_since").getLong("hours");
                 long minutes = coffee.getJSONObject("time_since").getLong("minutes");
 
 				if (hours >= 24) {
-					statusText = res.getString(R.string.turnedOnMoreThanDay);
+					statusText = getString(R.string.turnedOnMoreThanDay);
 				} else if (hours > 0) {
-					statusText = res.getString(R.string.turnedOnMoreThanHour);
+					statusText = getString(R.string.turnedOnMoreThanHour);
 				} else if (minutes == 1) {
-					statusText = res.getString(R.string.turnedOnOneMinue);
+					statusText = getString(R.string.turnedOnOneMinue);
 				} else {
-					statusText = String.format(res.getString(R.string.turnedOnMinutes), minutes);
+					statusText = String.format(getString(R.string.turnedOnMinutes), minutes);
 				}
 
 				footerText.setText(statusText);
