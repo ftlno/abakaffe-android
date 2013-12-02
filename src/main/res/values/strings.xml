@@ -6,7 +6,7 @@
     <string name="status_placeholder">Ikke oppdatert</string>
     <string name="power_placeholder">Kaffetrakteren er av.</string>
 
-    <string name="power">Kaffetrakter</string>
+    <string name="power">Kaffetrakter er </string>
     <string name="details">Sist traktet</string>
 
     <string name="update_button">Oppdater</string>
@@ -15,7 +15,7 @@
     <string name="minutes">Minutter</string>
     <string name="timesince">Tid siden kaffetrakteren ble skrudd på</string>
 
-    <string name="defaultStatus">Kaffetrakter ??</string>
+    <string name="defaultStatus">Kaffetrakter er??</string>
     <string name="defaultFooterText">Kunne ikke hente informasjon..</string>
 
     <string name="turnedOnMoreThanDay">Sist skrudd på for mer enn et døgn siden.</string>
