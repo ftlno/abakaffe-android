@@ -49,7 +49,7 @@ public class Utilities {
 		} else if (hours > 0) {
 			return "Sist skrudd på for mer enn en time siden.";
 		} else if (mins == 1) {
-			return "Sist skrudd på for " + mins + " minutt siden.";
+			return "Sist skrudd på for ett minutt siden.";
 		} else {
 			return "Sist skrudd på for " + mins + " minutter siden.";
 		}
