@@ -10,9 +10,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by fredrik on 29.11.13.
@@ -47,31 +44,16 @@ public class Utilities {
 		return null;
 	}
 
-	public static String formatStatus(String last_start, Context context) {
+	public static String formatStatus(long hours, long mins, Context context) {
 
-		try {
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-			Date now = new Date();
-			Date last = df.parse(last_start);
-
-			long diff = (now.getTime() - last.getTime()) / 1000;
-			long hours = diff / 3600;
-			long mins = diff / 60;
-
-			if (hours >= 24) {
-				return "Sist skrudd på for mer enn et døgn siden.";
-			} else if (hours > 0) {
-				return "Sist skrudd på for mer enn en time siden.";
-			} else if (mins == 1) {
-				return "Sist skrudd på for " + mins + " minutt siden.";
-			} else {
-				return "Sist skrudd på for " + mins + " minutter siden.";
-			}
-
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if (hours >= 24) {
+			return "Sist skrudd på for mer enn et døgn siden.";
+		} else if (hours > 0) {
+			return "Sist skrudd på for mer enn en time siden.";
+		} else if (mins == 1) {
+			return "Sist skrudd på for " + mins + " minutt siden.";
+		} else {
+			return "Sist skrudd på for " + mins + " minutter siden.";
 		}
-
-		return context.getText(R.string.defaultFooterText) + "";
 	}
 }

@@ -146,8 +146,10 @@ public class AbakaffeFragment extends Fragment {
 				statusText.setText(stringBuilder, TextView.BufferType.SPANNABLE);
 				statusField.animate().y(statusFieldPosition).setDuration(1000);
 
-				String last_start = coffee.getString("last_start");
-                footerText.setText(Utilities.formatStatus(last_start,context));
+                long hours = coffee.getJSONObject("time_since").getLong("hours");
+                long minutes = coffee.getJSONObject("time_since").getLong("minutes");
+
+                footerText.setText(Utilities.formatStatus(hours,minutes,context));
 
 			} catch (JSONException e) {
                 e.printStackTrace();
