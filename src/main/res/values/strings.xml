@@ -4,9 +4,8 @@
     <string name="app_name">Abakaffe</string>
     <string name="action_settings">Innstillinger</string>
     <string name="status_placeholder">Ikke oppdatert</string>
-    <string name="power_placeholder">Kaffetrakteren er av.</string>
 
-    <string name="power">Kaffetrakter er </string>
+    <string name="power">Kaffetrakteren er </string>
     <string name="details">Sist traktet</string>
 
     <string name="update_button">Oppdater</string>
