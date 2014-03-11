@@ -11,6 +11,5 @@ https://play.google.com/store/apps/details?id=no.ftl.abakaffe
 * Khrall - https://github.com/Khrall
 
 ###Skjermbilde
-----------
 ![Settings Window]
 (https://raw.github.com/ftlno/abakaffe-android/master/abakaffe.png)
