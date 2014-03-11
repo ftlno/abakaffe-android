@@ -9,4 +9,8 @@ https://play.google.com/store/apps/details?id=no.ftl.abakaffe
 * ftlno - https://github.com/ftlno
 * martinhath - https://github.com/martinhath
 * Khrall - https://github.com/Khrall
-    
+
+Screenshot
+----------
+![Settings Window]
+(https://raw.github.com/ftlno/abakaffe/master/abakaffe.png)
