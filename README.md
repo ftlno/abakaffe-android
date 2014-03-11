@@ -13,4 +13,4 @@ https://play.google.com/store/apps/details?id=no.ftl.abakaffe
 Screenshot
 ----------
 ![Settings Window]
-(https://raw.github.com/ftlno/abakaffe/master/abakaffe.png)
+(https://raw.github.com/ftlno/abakaffe-android/master/abakaffe.png)
