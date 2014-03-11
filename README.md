@@ -10,7 +10,7 @@ https://play.google.com/store/apps/details?id=no.ftl.abakaffe
 * martinhath - https://github.com/martinhath
 * Khrall - https://github.com/Khrall
 
-Screenshot
+Skjermbilde
 ----------
 ![Settings Window]
 (https://raw.github.com/ftlno/abakaffe-android/master/abakaffe.png)
